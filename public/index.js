@@ -14,6 +14,9 @@ app.set("views", viewsPath); //telling express to get templates from templates/v
 
 hbs.registerPartials(partialsPath);
 
+//set up static asset directory (gimme CSS)
+app.use(express.static(publicDirectoryPath));
+
 app.get("", async (req, res) => {
   try {
     res.render("index", {
