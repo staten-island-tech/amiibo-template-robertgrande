@@ -17,6 +17,10 @@ hbs.registerPartials(partialsPath);
 //set up static asset directory (gimme CSS)
 app.use(express.static(publicDirectoryPath));
 
+app.listen(3000, () => {
+  console.log("Listening on port 3000");
+});
+
 app.get("", async (req, res) => {
   try {
     res.render("index", {
@@ -38,15 +42,14 @@ app.get("/about/:id", async (req, res) => {
   }
 });
 
-app.get("/anything", async (req, res) => {
+app.get("/showcase:id", async (req, res) => {
+  const title = req.params.id;
   try {
-    res.render("swag");
+    res.render("showcase", {
+      title: `${title}`
+    });
   } catch {
     res.status(500).send();
   }
 });
 
-app.listen(3000, () => {
-  console.log("Listening on port 3000");
-  console.log(viewsPath);
-});
